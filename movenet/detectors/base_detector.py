@@ -8,25 +8,26 @@ from progress.bar import Bar
 import time
 import torch
 
-from models.model import create_model, load_model
-from utils.image import get_affine_transform
-from utils.debugger import Debugger
+from ..models.model import create_model, load_model
+from ..utils.image import get_affine_transform
+from ..utils.debugger import Debugger
 
 
 class BaseDetector(object):
     def __init__(self, opt):
         if opt.gpus[0] >= 0:
-            opt.device = torch.device('cuda')
+            opt.device = torch.device("cuda")
         else:
-            opt.device = torch.device('cpu')
+            opt.device = torch.device("cpu")
 
-        print('Creating model...')
-        self.model = create_model(opt.arch, opt.heads,
-                                  opt.head_conv, opt.froze_backbone)
+        print("Creating model...")
+        self.model = create_model(
+            opt.arch, opt.heads, opt.head_conv, opt.froze_backbone
+        )
         self.model = load_model(self.model, opt.load_model)
         self.model = self.model.to(opt.device)
         self.model.eval()
-        
+
         self.mean = np.array(opt.mean, dtype=np.float32).reshape(1, 1, 3)
         self.std = np.array(opt.std, dtype=np.float32).reshape(1, 1, 3)
         self.max_per_image = 100
@@ -42,34 +43,49 @@ class BaseDetector(object):
         if height > width:
             diff = height - width
             image = cv2.copyMakeBorder(
-                image, 0, 0, int(diff//2), int(diff//2 + diff%2),
-                cv2.BORDER_CONSTANT, value=(0,0,0))
+                image,
+                0,
+                0,
+                int(diff // 2),
+                int(diff // 2 + diff % 2),
+                cv2.BORDER_CONSTANT,
+                value=(0, 0, 0),
+            )
         elif height < width:
             diff = width - height
             image = cv2.copyMakeBorder(
-                image, int(diff//2), int(diff//2+diff%2), 0, 0,
-                cv2.BORDER_CONSTANT, value=(0,0,0))
+                image,
+                int(diff // 2),
+                int(diff // 2 + diff % 2),
+                0,
+                0,
+                cv2.BORDER_CONSTANT,
+                value=(0, 0, 0),
+            )
 
-        new_height = 256#192
-        new_width = 256#192
+        new_height = 256  # 192
+        new_width = 256  # 192
 
         inp_height = new_height
         inp_width = new_width
         c = np.array([new_width // 2, new_height // 2], dtype=np.float32)
         s = np.array([inp_width, inp_height], dtype=np.float32)
 
-        inp_image = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_LINEAR)
+        inp_image = cv2.resize(
+            image, (new_width, new_height), interpolation=cv2.INTER_LINEAR
+        )
         inp_image = cv2.cvtColor(inp_image, cv2.COLOR_BGR2RGB).astype(np.float32)
-        inp_image = ((inp_image / 127.5 - self.mean) /
-                     self.std).astype(np.float32)
-        images = inp_image.transpose(2, 0, 1).reshape(
-            1, 3, inp_height, inp_width)
+        inp_image = ((inp_image / 127.5 - self.mean) / self.std).astype(np.float32)
+        images = inp_image.transpose(2, 0, 1).reshape(1, 3, inp_height, inp_width)
         images = torch.from_numpy(images)
-        meta = {'c': c, 's': s,
-                'in_height': height,
-                'in_width': width,
-                'out_height': inp_height // self.opt.down_ratio,
-                'out_width': inp_width // self.opt.down_ratio}
+        meta = {
+            "c": c,
+            "s": s,
+            "in_height": height,
+            "in_width": width,
+            "out_height": inp_height // self.opt.down_ratio,
+            "out_width": inp_width // self.opt.down_ratio,
+        }
         return images, meta
 
     def process(self, images, return_time=False):
@@ -90,16 +106,19 @@ class BaseDetector(object):
     def run(self, image_or_path_or_tensor, meta=None):
         load_time, pre_time, net_time, dec_time, post_time = 0, 0, 0, 0, 0
         merge_time, tot_time = 0, 0
-        debugger = Debugger(dataset=self.opt.dataset, ipynb=(self.opt.debug == 3),
-                            theme=self.opt.debugger_theme)
+        debugger = Debugger(
+            dataset=self.opt.dataset,
+            ipynb=(self.opt.debug == 3),
+            theme=self.opt.debugger_theme,
+        )
         start_time = time.time()
         if isinstance(image_or_path_or_tensor, np.ndarray):
             image = image_or_path_or_tensor
-        elif type(image_or_path_or_tensor) == type(''):
+        elif type(image_or_path_or_tensor) == type(""):
             image = cv2.imread(image_or_path_or_tensor)
 
         loaded_time = time.time()
-        load_time += (loaded_time - start_time)
+        load_time += loaded_time - start_time
 
         # detections = []
         scale_start_time = time.time()
@@ -133,6 +152,13 @@ class BaseDetector(object):
             self.show_results(debugger, image, results, prefix=self.global_num)
             self.global_num += 1
 
-        return {'results': results, 'tot': tot_time, 'load': load_time,
-                'pre': pre_time, 'net': net_time, 'dec': dec_time,
-                'post': post_time, 'merge': merge_time}
+        return {
+            "results": results,
+            "tot": tot_time,
+            "load": load_time,
+            "pre": pre_time,
+            "net": net_time,
+            "dec": dec_time,
+            "post": post_time,
+            "merge": merge_time,
+        }

@@ -11,3 +11,11 @@ If you are interested on Movenet, open an issue and I will guide you have to con
 
 ## Demo
 
+Run:
+
+```
+python demo.py single_pose --dataset active --arch movenet --demo data/input_image.jpeg --load_model ./weights/movenet.pth --K 1 --gpus -1 --debug 2
+```
+
+
+![](https://raw.githubusercontent.com/jinfagang/public_images/master/20221017164046.png)

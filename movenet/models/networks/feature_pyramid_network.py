@@ -1,8 +1,8 @@
-'''
+"""
 Based on torchvision.ops.feature_pyramid_network.
 In the original paper, they `fix the feature dimension (numbers of channels, denoted as d) in all the feature maps.`
 However, by diving into the Movenet, I found out that the feature dimension is incrementally decreased, from 64 to 32 to 24. So I made the changes correspondingly.
-'''
+"""
 
 from collections import OrderedDict
 
@@ -11,13 +11,9 @@ from torch import nn, Tensor
 
 from typing import Tuple, List, Dict, Optional
 
+
 class SeperableConv(nn.Module):
-    def __init__(
-        self,
-        inp: int,
-        oup: int,
-        activation_layer = None
-    ) -> None:
+    def __init__(self, inp: int, oup: int, activation_layer=None) -> None:
         super(SeperableConv, self).__init__()
 
         if activation_layer is None:
@@ -26,13 +22,25 @@ class SeperableConv(nn.Module):
         hidden_dim = int(round(inp))
 
         layers: List[nn.Module] = []
-        layers.extend([
-            # dw
-            nn.Conv2d(hidden_dim, hidden_dim, kernel_size=3, stride=1, padding=1, groups=hidden_dim, bias=True),
-            # pw-linear
-            nn.Conv2d(hidden_dim, oup, kernel_size=1, stride=1, padding=0, bias=True),
-            activation_layer(inplace=True),
-        ])
+        layers.extend(
+            [
+                # dw
+                nn.Conv2d(
+                    hidden_dim,
+                    hidden_dim,
+                    kernel_size=3,
+                    stride=1,
+                    padding=1,
+                    groups=hidden_dim,
+                    bias=True,
+                ),
+                # pw-linear
+                nn.Conv2d(
+                    hidden_dim, oup, kernel_size=1, stride=1, padding=0, bias=True
+                ),
+                activation_layer(inplace=True),
+            ]
+        )
         self.conv = nn.Sequential(*layers)
         self.out_channels = oup
 
@@ -77,21 +85,26 @@ class FeaturePyramidNetwork(nn.Module):
         >>>    ('feat3', torch.Size([1, 5, 8, 8]))]
 
     """
+
     def __init__(
         self,
-        in_channels_list: List[int], # [24, 32, 64, 1280]
-        out_channels_list: List[int], # [24, 32, 64, 64]
-        fused_channels_list = List[int], # [24, 24, 32]
+        in_channels_list: List[int],  # [24, 32, 64, 1280]
+        out_channels_list: List[int],  # [24, 32, 64, 64]
+        fused_channels_list=List[int],  # [24, 24, 32]
     ):
         super(FeaturePyramidNetwork, self).__init__()
         self.inner_blocks = nn.ModuleList()
         self.layer_blocks = nn.ModuleList()
-        assert len(in_channels_list) == len(out_channels_list), 'The lengths of in_channels_list and out_channels_list should be equal.'
+        assert len(in_channels_list) == len(
+            out_channels_list
+        ), "The lengths of in_channels_list and out_channels_list should be equal."
         for i in range(len(in_channels_list)):
             in_channels = in_channels_list[i]
             out_channels = out_channels_list[i]
             if in_channels == 0 or out_channels == 0:
-                raise ValueError("in_channels=0/out_channels=0 is currently not supported")
+                raise ValueError(
+                    "in_channels=0/out_channels=0 is currently not supported"
+                )
             inner_block_module = nn.Conv2d(in_channels, out_channels, 1)
             self.inner_blocks.append(inner_block_module)
             if i != len(in_channels_list) - 1:
@@ -153,15 +166,16 @@ class FeaturePyramidNetwork(nn.Module):
 
         last_inner = self.get_result_from_inner_blocks(x[-1], -1)
 
-
-        for idx in range(len(x)-2, -1, -1):
+        for idx in range(len(x) - 2, -1, -1):
             inner_lateral = self.get_result_from_inner_blocks(x[idx], idx)
 
             # for pytorch inference
-            inner_top_down = F.interpolate(last_inner, scale_factor=2, mode="bilinear", align_corners=False)
+            inner_top_down = F.interpolate(
+                last_inner, scale_factor=2, mode="bilinear", align_corners=False
+            )
             # for model convertion, please comment the above line and uncomment the following line.
             # inner_top_down = F.interpolate(last_inner, scale_factor=2, mode="nearest")
             last_inner = inner_lateral + inner_top_down
             last_inner = self.get_result_from_layer_blocks(last_inner, idx)
-        
+
         return last_inner

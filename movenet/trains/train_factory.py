@@ -5,7 +5,4 @@ from __future__ import print_function
 from .multi_pose import MultiPoseTrainer
 from .single_pose import SinglePoseTrainer
 
-train_factory = {
-  'multi_pose': MultiPoseTrainer,
-  'single_pose': SinglePoseTrainer
-}
+train_factory = {"multi_pose": MultiPoseTrainer, "single_pose": SinglePoseTrainer}

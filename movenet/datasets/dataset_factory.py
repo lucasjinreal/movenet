@@ -11,19 +11,19 @@ from .dataset.active import ACTIVE
 
 
 dataset_factory = {
-  'coco_hp': COCOHP,
-  'active': ACTIVE,
-  'active_coco': ACTIVE,
+    "coco_hp": COCOHP,
+    "active": ACTIVE,
+    "active_coco": ACTIVE,
 }
 
 _sample_factory = {
-  'multi_pose': MultiPoseDataset,
-  'single_pose': SinglePoseDataset,
+    "multi_pose": MultiPoseDataset,
+    "single_pose": SinglePoseDataset,
 }
 
 
 def get_dataset(dataset, task):
-  class Dataset(dataset_factory[dataset], _sample_factory[task]):
-    pass
-  return Dataset
-  
+    class Dataset(dataset_factory[dataset], _sample_factory[task]):
+        pass
+
+    return Dataset

@@ -6,6 +6,7 @@ from .feature_pyramid_network import FeaturePyramidNetwork
 
 from torchvision.ops import misc as misc_nn_ops
 from torchvision.models._utils import IntermediateLayerGetter
+
 # from torchvision.models import mobilenet
 from .mobilenetv2 import mobilenet_v2
 
@@ -28,9 +29,9 @@ class BackboneWithFPN(nn.Module):
     Attributes:
         out_channels (int): the number of channels in the FPN
     """
+
     def __init__(self, backbone, return_layers, in_channels_list, out_channels):
         super(BackboneWithFPN, self).__init__()
-
 
         self.body = IntermediateLayerGetter(backbone, return_layers=return_layers)
         self.fpn = FeaturePyramidNetwork(
@@ -47,16 +48,16 @@ class BackboneWithFPN(nn.Module):
 
 
 def mobilenet_backbone(
-    backbone_name, # discared as we always use mobilenet v2
+    backbone_name,  # discared as we always use mobilenet v2
     pretrained,
     fpn,
     norm_layer=misc_nn_ops.FrozenBatchNorm2d,
     trainable_layers=2,
     returned_layers=None,
     extra_blocks=None,
-    model_type='lighting'
+    model_type="lighting",
 ):
-    if model_type == 'lighting':
+    if model_type == "lighting":
         inverted_residual_setting = [
             # t, c, n, s
             [1, 16, 1, 1],
@@ -79,7 +80,11 @@ def mobilenet_backbone(
             [6, 560, 1, 1],
         ]
 
-    backbone = mobilenet_v2(pretrained=pretrained, norm_layer=norm_layer, inverted_residual_setting = inverted_residual_setting).features
+    backbone = mobilenet_v2(
+        pretrained=pretrained,
+        norm_layer=norm_layer,
+        inverted_residual_setting=inverted_residual_setting,
+    ).features
     # print("backbone: ", backbone)
 
     # Gather the indices of blocks which are strided. These are the locations of C1, ..., Cn-1 blocks.
@@ -95,7 +100,11 @@ def mobilenet_backbone(
 
     # find the index of the layer from which we wont freeze
     assert 0 <= trainable_layers <= num_stages
-    freeze_before = len(backbone) if trainable_layers == 0 else stage_indices[num_stages - trainable_layers]
+    freeze_before = (
+        len(backbone)
+        if trainable_layers == 0
+        else stage_indices[num_stages - trainable_layers]
+    )
 
     # mli: make all layers trainable.
     # for b in backbone[:freeze_before]:
@@ -111,10 +120,14 @@ def mobilenet_backbone(
         if returned_layers is None:
             returned_layers = list(range(num_stages))
         assert min(returned_layers) >= 0 and max(returned_layers) < num_stages
-        return_layers = {f'{stage_indices[k]}': str(v) for v, k in enumerate(returned_layers)}
+        return_layers = {
+            f"{stage_indices[k]}": str(v) for v, k in enumerate(returned_layers)
+        }
         # print("Return layers: ", return_layers)
 
-        in_channels_list = [backbone[stage_indices[i]].out_channels for i in returned_layers]
+        in_channels_list = [
+            backbone[stage_indices[i]].out_channels for i in returned_layers
+        ]
         # print("in_channels_list", in_channels_list)
 
         return BackboneWithFPN(backbone, return_layers, in_channels_list, out_channels)
@@ -126,6 +139,7 @@ def mobilenet_backbone(
         )
         m.out_channels = out_channels
         return m
+
 
 '''
 # test the functionality
