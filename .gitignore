@@ -1,3 +1,7 @@
 vendor/
 .vscode/
 __pycache__/
+*.pt
+*.onnx
+*.wnnx
+*.bin

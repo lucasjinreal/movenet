@@ -13,6 +13,7 @@ from __future__ import print_function
 import os
 import math
 import logging
+from turtle import shape
 
 import cv2
 
@@ -22,7 +23,7 @@ import torch
 import torch.nn as nn
 from .backbone_utils import mobilenet_backbone
 import torch.utils.model_zoo as model_zoo
-from alfred import logger
+from alfred import logger, print_shape
 
 BN_MOMENTUM = 0.1
 
@@ -42,7 +43,7 @@ class MoveNet(nn.Module):
         self.ft_size = ft_size
         self.weight_to_center = self._generate_center_dist(self.ft_size).unsqueeze(2)
 
-        logger.info(f"{self.heads}")
+        logger.info(f"{self.heads}, ft_size: {self.ft_size}")
 
         self.dist_y, self.dist_x = self._generate_dist_map(self.ft_size)
         self.index_17 = torch.arange(0, self.num_joints).float()
@@ -86,10 +87,40 @@ class MoveNet(nn.Module):
 
         x = self.backbone(x)
         ret = {}
+        print(self.heads)
+        # return x
         for head in self.heads:
             ret[head] = self.__getattr__(head)(x)
+        if torch.jit.is_tracing():
+            logger.info('in tracing mode....')
+            hm = ret['hm']
+            hm_hp = ret['hm_hp']
+            hps = ret['hps']
+            hp_offset = ret['hp_offset']
+            print_shape(hm, hm_hp, hps, hp_offset)
+            ret = self.decode_jit(hm_hp, hm, hps, hp_offset)
+            return ret
+        else:
+            return [ret]
 
-        return [ret]
+    def decode_jit(self, hm_hp, hm, hps, hp_offset):
+        kpt_heatmap, center, kpt_regress, kpt_offset = (
+            hm_hp.squeeze(0).permute((1, 2, 0)),
+            hm.squeeze(0).permute((1, 2, 0)),
+            hps.squeeze(0).permute((1, 2, 0)),
+            hp_offset.squeeze(0).permute((1, 2, 0)),
+        )
+        # pose decode
+        kpt_heatmap = torch.sigmoid(kpt_heatmap)
+        center = torch.sigmoid(center)
+        print_shape(center)
+        ct_ind = self._top_with_center(center)
+        kpt_coor = self._center_to_kpt(kpt_regress, ct_ind)
+        kpt_top_inds = self._kpt_from_heatmap(kpt_heatmap, kpt_coor)
+        kpt_with_conf = self._kpt_from_offset(
+            kpt_offset, kpt_top_inds, kpt_heatmap, self.ft_size
+        )
+        return kpt_with_conf
 
     def decode(self, x):
         kpt_heatmap, center, kpt_regress, kpt_offset = (
