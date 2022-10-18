@@ -182,7 +182,8 @@ class MoveNet(nn.Module):
         print_shape(ct_ind)
         # ct_ind = ct_ind.unsqueeze(-1)
         # ct_ind = torch.concat([ct_ind, ct_ind], dim=-1)
-        ct_ind = ct_ind.unsqueeze(2).expand(ct_ind.size(0), self.num_joints, 2)
+        # ct_ind = ct_ind.unsqueeze(2).expand(ct_ind.size(0), self.num_joints, 2)
+        ct_ind = ct_ind.unsqueeze(2).repeat(ct_ind.size(0), self.num_joints, 2)
         print_shape(ct_ind)
         
         kpt_coor = kpt_regress.gather(0, ct_ind).squeeze(0)

@@ -21,7 +21,7 @@ nn.ReLU6                 backbone.body.3.conv.0.1 1 1 16 17 #16=(1,144,64,64)f32
 nn.Conv2d                backbone.body.3.conv.1.0 1 1 17 18 bias=True dilation=(1,1) groups=144 in_channels=144 kernel_size=(3,3) out_channels=144 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(144)f32 @weight=(144,1,3,3)f32 #17=(1,144,64,64)f32 #18=(1,144,64,64)f32
 nn.ReLU6                 backbone.body.3.conv.1.1 1 1 18 19 #18=(1,144,64,64)f32 #19=(1,144,64,64)f32
 nn.Conv2d                backbone.body.3.conv.2   1 1 19 20 bias=True dilation=(1,1) groups=1 in_channels=144 kernel_size=(1,1) out_channels=24 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,144,1,1)f32 #19=(1,144,64,64)f32 #20=(1,24,64,64)f32
-pnnx.Expression          pnnx_expr_152            2 1 15 20 21 expr=add(@0,@1) #15=(1,24,64,64)f32 #20=(1,24,64,64)f32 #21=(1,24,64,64)f32
+pnnx.Expression          pnnx_expr_146            2 1 15 20 21 expr=add(@0,@1) #15=(1,24,64,64)f32 #20=(1,24,64,64)f32 #21=(1,24,64,64)f32
 nn.Conv2d                backbone.body.4.conv.0.0 1 1 21 22 bias=True dilation=(1,1) groups=1 in_channels=24 kernel_size=(1,1) out_channels=144 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(144)f32 @weight=(144,24,1,1)f32 #21=(1,24,64,64)f32 #22=(1,144,64,64)f32
 nn.ReLU6                 backbone.body.4.conv.0.1 1 1 22 23 #22=(1,144,64,64)f32 #23=(1,144,64,64)f32
 nn.ZeroPad2d             backbone.body.4.conv.1.0 1 1 23 24 padding=(0,1,0,1) #23=(1,144,64,64)f32 #24=(1,144,65,65)f32
@@ -33,13 +33,13 @@ nn.ReLU6                 backbone.body.5.conv.0.1 1 1 28 29 #28=(1,192,32,32)f32
 nn.Conv2d                backbone.body.5.conv.1.0 1 1 29 30 bias=True dilation=(1,1) groups=192 in_channels=192 kernel_size=(3,3) out_channels=192 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(192)f32 @weight=(192,1,3,3)f32 #29=(1,192,32,32)f32 #30=(1,192,32,32)f32
 nn.ReLU6                 backbone.body.5.conv.1.1 1 1 30 31 #30=(1,192,32,32)f32 #31=(1,192,32,32)f32
 nn.Conv2d                backbone.body.5.conv.2   1 1 31 32 bias=True dilation=(1,1) groups=1 in_channels=192 kernel_size=(1,1) out_channels=32 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,192,1,1)f32 #31=(1,192,32,32)f32 #32=(1,32,32,32)f32
-pnnx.Expression          pnnx_expr_150            2 1 27 32 33 expr=add(@0,@1) #27=(1,32,32,32)f32 #32=(1,32,32,32)f32 #33=(1,32,32,32)f32
+pnnx.Expression          pnnx_expr_144            2 1 27 32 33 expr=add(@0,@1) #27=(1,32,32,32)f32 #32=(1,32,32,32)f32 #33=(1,32,32,32)f32
 nn.Conv2d                backbone.body.6.conv.0.0 1 1 33 34 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=192 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(192)f32 @weight=(192,32,1,1)f32 #33=(1,32,32,32)f32 #34=(1,192,32,32)f32
 nn.ReLU6                 backbone.body.6.conv.0.1 1 1 34 35 #34=(1,192,32,32)f32 #35=(1,192,32,32)f32
 nn.Conv2d                backbone.body.6.conv.1.0 1 1 35 36 bias=True dilation=(1,1) groups=192 in_channels=192 kernel_size=(3,3) out_channels=192 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(192)f32 @weight=(192,1,3,3)f32 #35=(1,192,32,32)f32 #36=(1,192,32,32)f32
 nn.ReLU6                 backbone.body.6.conv.1.1 1 1 36 37 #36=(1,192,32,32)f32 #37=(1,192,32,32)f32
 nn.Conv2d                backbone.body.6.conv.2   1 1 37 38 bias=True dilation=(1,1) groups=1 in_channels=192 kernel_size=(1,1) out_channels=32 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,192,1,1)f32 #37=(1,192,32,32)f32 #38=(1,32,32,32)f32
-pnnx.Expression          pnnx_expr_148            2 1 33 38 39 expr=add(@0,@1) #33=(1,32,32,32)f32 #38=(1,32,32,32)f32 #39=(1,32,32,32)f32
+pnnx.Expression          pnnx_expr_142            2 1 33 38 39 expr=add(@0,@1) #33=(1,32,32,32)f32 #38=(1,32,32,32)f32 #39=(1,32,32,32)f32
 nn.Conv2d                backbone.body.7.conv.0.0 1 1 39 40 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=192 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(192)f32 @weight=(192,32,1,1)f32 #39=(1,32,32,32)f32 #40=(1,192,32,32)f32
 nn.ReLU6                 backbone.body.7.conv.0.1 1 1 40 41 #40=(1,192,32,32)f32 #41=(1,192,32,32)f32
 nn.ZeroPad2d             backbone.body.7.conv.1.0 1 1 41 42 padding=(0,1,0,1) #41=(1,192,32,32)f32 #42=(1,192,33,33)f32
@@ -51,19 +51,19 @@ nn.ReLU6                 backbone.body.8.conv.0.1 1 1 46 47 #46=(1,384,16,16)f32
 nn.Conv2d                backbone.body.8.conv.1.0 1 1 47 48 bias=True dilation=(1,1) groups=384 in_channels=384 kernel_size=(3,3) out_channels=384 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,1,3,3)f32 #47=(1,384,16,16)f32 #48=(1,384,16,16)f32
 nn.ReLU6                 backbone.body.8.conv.1.1 1 1 48 49 #48=(1,384,16,16)f32 #49=(1,384,16,16)f32
 nn.Conv2d                backbone.body.8.conv.2   1 1 49 50 bias=True dilation=(1,1) groups=1 in_channels=384 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,384,1,1)f32 #49=(1,384,16,16)f32 #50=(1,64,16,16)f32
-pnnx.Expression          pnnx_expr_146            2 1 45 50 51 expr=add(@0,@1) #45=(1,64,16,16)f32 #50=(1,64,16,16)f32 #51=(1,64,16,16)f32
+pnnx.Expression          pnnx_expr_140            2 1 45 50 51 expr=add(@0,@1) #45=(1,64,16,16)f32 #50=(1,64,16,16)f32 #51=(1,64,16,16)f32
 nn.Conv2d                backbone.body.9.conv.0.0 1 1 51 52 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=384 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,64,1,1)f32 #51=(1,64,16,16)f32 #52=(1,384,16,16)f32
 nn.ReLU6                 backbone.body.9.conv.0.1 1 1 52 53 #52=(1,384,16,16)f32 #53=(1,384,16,16)f32
 nn.Conv2d                backbone.body.9.conv.1.0 1 1 53 54 bias=True dilation=(1,1) groups=384 in_channels=384 kernel_size=(3,3) out_channels=384 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,1,3,3)f32 #53=(1,384,16,16)f32 #54=(1,384,16,16)f32
 nn.ReLU6                 backbone.body.9.conv.1.1 1 1 54 55 #54=(1,384,16,16)f32 #55=(1,384,16,16)f32
 nn.Conv2d                backbone.body.9.conv.2   1 1 55 56 bias=True dilation=(1,1) groups=1 in_channels=384 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,384,1,1)f32 #55=(1,384,16,16)f32 #56=(1,64,16,16)f32
-pnnx.Expression          pnnx_expr_144            2 1 51 56 57 expr=add(@0,@1) #51=(1,64,16,16)f32 #56=(1,64,16,16)f32 #57=(1,64,16,16)f32
+pnnx.Expression          pnnx_expr_138            2 1 51 56 57 expr=add(@0,@1) #51=(1,64,16,16)f32 #56=(1,64,16,16)f32 #57=(1,64,16,16)f32
 nn.Conv2d                backbone.body.10.conv.0.0 1 1 57 58 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=384 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,64,1,1)f32 #57=(1,64,16,16)f32 #58=(1,384,16,16)f32
 nn.ReLU6                 backbone.body.10.conv.0.1 1 1 58 59 #58=(1,384,16,16)f32 #59=(1,384,16,16)f32
 nn.Conv2d                backbone.body.10.conv.1.0 1 1 59 60 bias=True dilation=(1,1) groups=384 in_channels=384 kernel_size=(3,3) out_channels=384 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,1,3,3)f32 #59=(1,384,16,16)f32 #60=(1,384,16,16)f32
 nn.ReLU6                 backbone.body.10.conv.1.1 1 1 60 61 #60=(1,384,16,16)f32 #61=(1,384,16,16)f32
 nn.Conv2d                backbone.body.10.conv.2  1 1 61 62 bias=True dilation=(1,1) groups=1 in_channels=384 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,384,1,1)f32 #61=(1,384,16,16)f32 #62=(1,64,16,16)f32
-pnnx.Expression          pnnx_expr_142            2 1 57 62 63 expr=add(@0,@1) #57=(1,64,16,16)f32 #62=(1,64,16,16)f32 #63=(1,64,16,16)f32
+pnnx.Expression          pnnx_expr_136            2 1 57 62 63 expr=add(@0,@1) #57=(1,64,16,16)f32 #62=(1,64,16,16)f32 #63=(1,64,16,16)f32
 nn.Conv2d                backbone.body.11.conv.0.0 1 1 63 64 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=384 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,64,1,1)f32 #63=(1,64,16,16)f32 #64=(1,384,16,16)f32
 nn.ReLU6                 backbone.body.11.conv.0.1 1 1 64 65 #64=(1,384,16,16)f32 #65=(1,384,16,16)f32
 nn.Conv2d                backbone.body.11.conv.1.0 1 1 65 66 bias=True dilation=(1,1) groups=384 in_channels=384 kernel_size=(3,3) out_channels=384 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,1,3,3)f32 #65=(1,384,16,16)f32 #66=(1,384,16,16)f32
@@ -74,13 +74,13 @@ nn.ReLU6                 backbone.body.12.conv.0.1 1 1 69 70 #69=(1,576,16,16)f3
 nn.Conv2d                backbone.body.12.conv.1.0 1 1 70 71 bias=True dilation=(1,1) groups=576 in_channels=576 kernel_size=(3,3) out_channels=576 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(576)f32 @weight=(576,1,3,3)f32 #70=(1,576,16,16)f32 #71=(1,576,16,16)f32
 nn.ReLU6                 backbone.body.12.conv.1.1 1 1 71 72 #71=(1,576,16,16)f32 #72=(1,576,16,16)f32
 nn.Conv2d                backbone.body.12.conv.2  1 1 72 73 bias=True dilation=(1,1) groups=1 in_channels=576 kernel_size=(1,1) out_channels=96 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(96)f32 @weight=(96,576,1,1)f32 #72=(1,576,16,16)f32 #73=(1,96,16,16)f32
-pnnx.Expression          pnnx_expr_140            2 1 68 73 74 expr=add(@0,@1) #68=(1,96,16,16)f32 #73=(1,96,16,16)f32 #74=(1,96,16,16)f32
+pnnx.Expression          pnnx_expr_134            2 1 68 73 74 expr=add(@0,@1) #68=(1,96,16,16)f32 #73=(1,96,16,16)f32 #74=(1,96,16,16)f32
 nn.Conv2d                backbone.body.13.conv.0.0 1 1 74 75 bias=True dilation=(1,1) groups=1 in_channels=96 kernel_size=(1,1) out_channels=576 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(576)f32 @weight=(576,96,1,1)f32 #74=(1,96,16,16)f32 #75=(1,576,16,16)f32
 nn.ReLU6                 backbone.body.13.conv.0.1 1 1 75 76 #75=(1,576,16,16)f32 #76=(1,576,16,16)f32
 nn.Conv2d                backbone.body.13.conv.1.0 1 1 76 77 bias=True dilation=(1,1) groups=576 in_channels=576 kernel_size=(3,3) out_channels=576 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(576)f32 @weight=(576,1,3,3)f32 #76=(1,576,16,16)f32 #77=(1,576,16,16)f32
 nn.ReLU6                 backbone.body.13.conv.1.1 1 1 77 78 #77=(1,576,16,16)f32 #78=(1,576,16,16)f32
 nn.Conv2d                backbone.body.13.conv.2  1 1 78 79 bias=True dilation=(1,1) groups=1 in_channels=576 kernel_size=(1,1) out_channels=96 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(96)f32 @weight=(96,576,1,1)f32 #78=(1,576,16,16)f32 #79=(1,96,16,16)f32
-pnnx.Expression          pnnx_expr_138            2 1 74 79 80 expr=add(@0,@1) #74=(1,96,16,16)f32 #79=(1,96,16,16)f32 #80=(1,96,16,16)f32
+pnnx.Expression          pnnx_expr_132            2 1 74 79 80 expr=add(@0,@1) #74=(1,96,16,16)f32 #79=(1,96,16,16)f32 #80=(1,96,16,16)f32
 nn.Conv2d                backbone.body.14.conv.0.0 1 1 80 81 bias=True dilation=(1,1) groups=1 in_channels=96 kernel_size=(1,1) out_channels=576 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(576)f32 @weight=(576,96,1,1)f32 #80=(1,96,16,16)f32 #81=(1,576,16,16)f32
 nn.ReLU6                 backbone.body.14.conv.0.1 1 1 81 82 #81=(1,576,16,16)f32 #82=(1,576,16,16)f32
 nn.ZeroPad2d             backbone.body.14.conv.1.0 1 1 82 83 padding=(0,1,0,1) #82=(1,576,16,16)f32 #83=(1,576,17,17)f32
@@ -92,13 +92,13 @@ nn.ReLU6                 backbone.body.15.conv.0.1 1 1 87 88 #87=(1,960,8,8)f32 
 nn.Conv2d                backbone.body.15.conv.1.0 1 1 88 89 bias=True dilation=(1,1) groups=960 in_channels=960 kernel_size=(3,3) out_channels=960 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,1,3,3)f32 #88=(1,960,8,8)f32 #89=(1,960,8,8)f32
 nn.ReLU6                 backbone.body.15.conv.1.1 1 1 89 90 #89=(1,960,8,8)f32 #90=(1,960,8,8)f32
 nn.Conv2d                backbone.body.15.conv.2  1 1 90 91 bias=True dilation=(1,1) groups=1 in_channels=960 kernel_size=(1,1) out_channels=160 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(160)f32 @weight=(160,960,1,1)f32 #90=(1,960,8,8)f32 #91=(1,160,8,8)f32
-pnnx.Expression          pnnx_expr_136            2 1 86 91 92 expr=add(@0,@1) #86=(1,160,8,8)f32 #91=(1,160,8,8)f32 #92=(1,160,8,8)f32
+pnnx.Expression          pnnx_expr_130            2 1 86 91 92 expr=add(@0,@1) #86=(1,160,8,8)f32 #91=(1,160,8,8)f32 #92=(1,160,8,8)f32
 nn.Conv2d                backbone.body.16.conv.0.0 1 1 92 93 bias=True dilation=(1,1) groups=1 in_channels=160 kernel_size=(1,1) out_channels=960 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,160,1,1)f32 #92=(1,160,8,8)f32 #93=(1,960,8,8)f32
 nn.ReLU6                 backbone.body.16.conv.0.1 1 1 93 94 #93=(1,960,8,8)f32 #94=(1,960,8,8)f32
 nn.Conv2d                backbone.body.16.conv.1.0 1 1 94 95 bias=True dilation=(1,1) groups=960 in_channels=960 kernel_size=(3,3) out_channels=960 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,1,3,3)f32 #94=(1,960,8,8)f32 #95=(1,960,8,8)f32
 nn.ReLU6                 backbone.body.16.conv.1.1 1 1 95 96 #95=(1,960,8,8)f32 #96=(1,960,8,8)f32
 nn.Conv2d                backbone.body.16.conv.2  1 1 96 97 bias=True dilation=(1,1) groups=1 in_channels=960 kernel_size=(1,1) out_channels=160 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(160)f32 @weight=(160,960,1,1)f32 #96=(1,960,8,8)f32 #97=(1,160,8,8)f32
-pnnx.Expression          pnnx_expr_134            2 1 92 97 98 expr=add(@0,@1) #92=(1,160,8,8)f32 #97=(1,160,8,8)f32 #98=(1,160,8,8)f32
+pnnx.Expression          pnnx_expr_128            2 1 92 97 98 expr=add(@0,@1) #92=(1,160,8,8)f32 #97=(1,160,8,8)f32 #98=(1,160,8,8)f32
 nn.Conv2d                backbone.body.17.conv.0.0 1 1 98 99 bias=True dilation=(1,1) groups=1 in_channels=160 kernel_size=(1,1) out_channels=960 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,160,1,1)f32 #98=(1,160,8,8)f32 #99=(1,960,8,8)f32
 nn.ReLU6                 backbone.body.17.conv.0.1 1 1 99 100 #99=(1,960,8,8)f32 #100=(1,960,8,8)f32
 nn.Conv2d                backbone.body.17.conv.1.0 1 1 100 101 bias=True dilation=(1,1) groups=960 in_channels=960 kernel_size=(3,3) out_channels=960 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,1,3,3)f32 #100=(1,960,8,8)f32 #101=(1,960,8,8)f32
@@ -109,19 +109,19 @@ nn.ReLU6                 backbone.body.18.1       1 1 104 105 #104=(1,1280,8,8)f
 nn.Conv2d                backbone.fpn.inner_blocks.3 1 1 105 106 bias=True dilation=(1,1) groups=1 in_channels=1280 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,1280,1,1)f32 #105=(1,1280,8,8)f32 #106=(1,64,8,8)f32
 nn.Conv2d                backbone.fpn.inner_blocks.2 1 1 63 107 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,64,1,1)f32 #63=(1,64,16,16)f32 #107=(1,64,16,16)f32
 F.upsample               F.upsample_2             1 1 106 108 align_corners=False mode=bilinear scale_factor=(2.000000e+00,2.000000e+00) $input=106 #106=(1,64,8,8)f32 #108=(1,64,16,16)f32
-pnnx.Expression          pnnx_expr_129            2 1 107 108 109 expr=add(@0,@1) #107=(1,64,16,16)f32 #108=(1,64,16,16)f32 #109=(1,64,16,16)f32
+pnnx.Expression          pnnx_expr_123            2 1 107 108 109 expr=add(@0,@1) #107=(1,64,16,16)f32 #108=(1,64,16,16)f32 #109=(1,64,16,16)f32
 nn.Conv2d                backbone.fpn.layer_blocks.2.conv.0 1 1 109 110 bias=True dilation=(1,1) groups=64 in_channels=64 kernel_size=(3,3) out_channels=64 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,1,3,3)f32 #109=(1,64,16,16)f32 #110=(1,64,16,16)f32
 nn.Conv2d                backbone.fpn.layer_blocks.2.conv.1 1 1 110 111 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=32 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,64,1,1)f32 #110=(1,64,16,16)f32 #111=(1,32,16,16)f32
 nn.ReLU                  backbone.fpn.layer_blocks.2.conv.2 1 1 111 112 #111=(1,32,16,16)f32 #112=(1,32,16,16)f32
 nn.Conv2d                backbone.fpn.inner_blocks.1 1 1 39 113 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=32 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,32,1,1)f32 #39=(1,32,32,32)f32 #113=(1,32,32,32)f32
 F.upsample               F.upsample_3             1 1 112 114 align_corners=False mode=bilinear scale_factor=(2.000000e+00,2.000000e+00) $input=112 #112=(1,32,16,16)f32 #114=(1,32,32,32)f32
-pnnx.Expression          pnnx_expr_124            2 1 113 114 115 expr=add(@0,@1) #113=(1,32,32,32)f32 #114=(1,32,32,32)f32 #115=(1,32,32,32)f32
+pnnx.Expression          pnnx_expr_118            2 1 113 114 115 expr=add(@0,@1) #113=(1,32,32,32)f32 #114=(1,32,32,32)f32 #115=(1,32,32,32)f32
 nn.Conv2d                backbone.fpn.layer_blocks.1.conv.0 1 1 115 116 bias=True dilation=(1,1) groups=32 in_channels=32 kernel_size=(3,3) out_channels=32 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,1,3,3)f32 #115=(1,32,32,32)f32 #116=(1,32,32,32)f32
 nn.Conv2d                backbone.fpn.layer_blocks.1.conv.1 1 1 116 117 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=24 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,32,1,1)f32 #116=(1,32,32,32)f32 #117=(1,24,32,32)f32
 nn.ReLU                  backbone.fpn.layer_blocks.1.conv.2 1 1 117 118 #117=(1,24,32,32)f32 #118=(1,24,32,32)f32
 nn.Conv2d                backbone.fpn.inner_blocks.0 1 1 21 119 bias=True dilation=(1,1) groups=1 in_channels=24 kernel_size=(1,1) out_channels=24 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,24,1,1)f32 #21=(1,24,64,64)f32 #119=(1,24,64,64)f32
 F.upsample               F.upsample_4             1 1 118 120 align_corners=False mode=bilinear scale_factor=(2.000000e+00,2.000000e+00) $input=118 #118=(1,24,32,32)f32 #120=(1,24,64,64)f32
-pnnx.Expression          pnnx_expr_119            2 1 119 120 121 expr=add(@0,@1) #119=(1,24,64,64)f32 #120=(1,24,64,64)f32 #121=(1,24,64,64)f32
+pnnx.Expression          pnnx_expr_113            2 1 119 120 121 expr=add(@0,@1) #119=(1,24,64,64)f32 #120=(1,24,64,64)f32 #121=(1,24,64,64)f32
 nn.Conv2d                backbone.fpn.layer_blocks.0.conv.0 1 1 121 122 bias=True dilation=(1,1) groups=24 in_channels=24 kernel_size=(3,3) out_channels=24 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,1,3,3)f32 #121=(1,24,64,64)f32 #122=(1,24,64,64)f32
 nn.Conv2d                backbone.fpn.layer_blocks.0.conv.1 1 1 122 123 bias=True dilation=(1,1) groups=1 in_channels=24 kernel_size=(1,1) out_channels=24 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,24,1,1)f32 #122=(1,24,64,64)f32 #123=(1,24,64,64)f32
 nn.ReLU                  backbone.fpn.layer_blocks.0.conv.2 1 1 123 124 #123=(1,24,64,64)f32 #124=(1,24,64,64)f32
@@ -144,47 +144,47 @@ nn.Conv2d                hp_offset.3              1 1 139 140 bias=True dilation
 torch.squeeze            torch.squeeze_33         1 1 128 141 dim=0 $input=128 #128=(1,1,64,64)f32 #141=(1,64,64)f32
 torch.permute            torch.permute_28         1 1 141 142 dims=(1,2,0) $input=141 #141=(1,64,64)f32 #142=(64,64,1)f32
 F.sigmoid                F.sigmoid_1              1 1 142 143 $input=142 #142=(64,64,1)f32 #143=(64,64,1)f32
-pnnx.Expression          pnnx_expr_100            2 1 143 3 144 expr=mul(@0,@1) #143=(64,64,1)f32 #3=(64,64,1)f64 #144=(64,64,1)f64
-Tensor.view              Tensor.view_15           1 1 144 145 shape=(1,4096,1) $input=144 #144=(64,64,1)f64 #145=(1,4096,1)f64
-torch.argmax             torch.argmax_19          1 1 145 146 dim=1 keepdim=False $input=145 #145=(1,4096,1)f64 #146=(1,1)i64
-pnnx.Expression          pnnx_expr_94             1 1 146 147 expr=div(@0,48) #146=(1,1)i64 #147=(1,1)i64
-pnnx.Expression          pnnx_expr_90             2 1 146 147 148 expr=sub(@0,mul(@1,48)) #146=(1,1)i64 #147=(1,1)i64 #148=(1,1)i64
+pnnx.Expression          pnnx_expr_94             2 1 143 3 144 expr=mul(@0,@1) #143=(64,64,1)f32 #3=(64,64,1)f64 #144=(64,64,1)f64
+Tensor.view              Tensor.view_14           1 1 144 145 shape=(1,4096,1) $input=144 #144=(64,64,1)f64 #145=(1,4096,1)f64
+torch.argmax             torch.argmax_18          1 1 145 146 dim=1 keepdim=False $input=145 #145=(1,4096,1)f64 #146=(1,1)i64
+pnnx.Expression          pnnx_expr_88             1 1 146 147 expr=div(@0,48) #146=(1,1)i64 #147=(1,1)i64
+pnnx.Expression          pnnx_expr_84             2 1 146 147 148 expr=sub(@0,mul(@1,48)) #146=(1,1)i64 #147=(1,1)i64 #148=(1,1)i64
 torch.unsqueeze          torch.unsqueeze_39       1 1 146 149 dim=2 $input=146 #146=(1,1)i64 #149=(1,1,1)i64
-Tensor.expand            Tensor.expand_5          1 1 149 150 shape=(1,17,2) $input=149 #149=(1,1,1)i64 #150=(1,17,2)i64
+Tensor.repeat            Tensor.repeat_5          1 1 149 150 sizes=(1,17,2) $input=149 #149=(1,1,1)i64 #150=(1,17,2)i64
 torch.squeeze            torch.squeeze_34         1 1 132 151 dim=0 $input=132 #132=(1,34,64,64)f32 #151=(34,64,64)f32
 torch.permute            torch.permute_29         1 1 151 152 dims=(1,2,0) $input=151 #151=(34,64,64)f32 #152=(64,64,34)f32
-Tensor.view              Tensor.view_16           1 1 152 153 shape=(-1,17,2) $input=152 #152=(64,64,34)f32 #153=(4096,17,2)f32
+Tensor.view              Tensor.view_15           1 1 152 153 shape=(-1,17,2) $input=152 #152=(64,64,34)f32 #153=(4096,17,2)f32
 torch.gather             torch.gather_24          2 1 153 150 154 dim=0 $input=153 $index=150 #153=(4096,17,2)f32 #150=(1,17,2)i64 #154=(1,17,2)f32
-torch.cat                torch.cat_21             2 1 147 148 155 dim=1 #147=(1,1)i64 #148=(1,1)i64 #155=(1,2)i64
+torch.cat                torch.cat_20             2 1 147 148 155 dim=1 #147=(1,1)i64 #148=(1,1)i64 #155=(1,2)i64
 torch.squeeze            torch.squeeze_36         1 1 154 156 dim=0 $input=154 #154=(1,17,2)f32 #156=(17,2)f32
-pnnx.Expression          pnnx_expr_75             2 1 156 155 157 expr=add(@0,@1) #156=(17,2)f32 #155=(1,2)i64 #157=(17,2)f32
-torch.unbind             Tensor.select_11         1 2 157 158 159 dim=1 #157=(17,2)f32 #158=(17)f32 #159=(17)f32
-Tensor.reshape           Tensor.reshape_7         1 1 158 160 shape=(1,1,17) $input=158 #158=(17)f32 #160=(1,1,17)f32
-pnnx.Expression          pnnx_expr_64             2 1 2 160 161 expr=sub(@0,@1) #2=(64,64,1)f32 #160=(1,1,17)f32 #161=(64,64,17)f32
-Tensor.reshape           Tensor.reshape_8         1 1 159 162 shape=(1,1,17) $input=159 #159=(17)f32 #162=(1,1,17)f32
-pnnx.Expression          pnnx_expr_52             2 1 1 162 163 expr=sub(@0,@1) #1=(64,64,1)f32 #162=(1,1,17)f32 #163=(64,64,17)f32
+pnnx.Expression          pnnx_expr_69             2 1 156 155 157 expr=add(@0,@1) #156=(17,2)f32 #155=(1,2)i64 #157=(17,2)f32
+torch.unbind             Tensor.select_10         1 2 157 158 159 dim=1 #157=(17,2)f32 #158=(17)f32 #159=(17)f32
+Tensor.reshape           Tensor.reshape_6         1 1 158 160 shape=(1,1,17) $input=158 #158=(17)f32 #160=(1,1,17)f32
+pnnx.Expression          pnnx_expr_58             2 1 2 160 161 expr=sub(@0,@1) #2=(64,64,1)f32 #160=(1,1,17)f32 #161=(64,64,17)f32
+Tensor.reshape           Tensor.reshape_7         1 1 159 162 shape=(1,1,17) $input=159 #159=(17)f32 #162=(1,1,17)f32
+pnnx.Expression          pnnx_expr_46             2 1 1 162 163 expr=sub(@0,@1) #1=(64,64,1)f32 #162=(1,1,17)f32 #163=(64,64,17)f32
 torch.squeeze            torch.squeeze_32         1 1 136 164 dim=0 $input=136 #136=(1,17,64,64)f32 #164=(17,64,64)f32
 torch.permute            torch.permute_27         1 1 164 165 dims=(1,2,0) $input=164 #164=(17,64,64)f32 #165=(64,64,17)f32
 F.sigmoid                F.sigmoid_0              1 1 165 166 $input=165 #165=(64,64,17)f32 #166=(64,64,17)f32
-pnnx.Expression          pnnx_expr_44             3 1 166 161 163 167 expr=div(@0,add(sqrt(add(mul(@1,@1),mul(@2,@2))),1.800000e+00)) #166=(64,64,17)f32 #161=(64,64,17)f32 #163=(64,64,17)f32 #167=(64,64,17)f32
-Tensor.reshape           Tensor.reshape_9         1 1 167 168 shape=(1,4096,17) $input=167 #167=(64,64,17)f32 #168=(1,4096,17)f32
-torch.argmax             torch.argmax_20          1 1 168 169 dim=1 keepdim=False $input=168 #168=(1,4096,17)f32 #169=(1,17)i64
-pnnx.Expression          pnnx_expr_36             1 1 169 170 expr=div(@0,64) #169=(1,17)i64 #170=(1,17)i64
-pnnx.Expression          pnnx_expr_32             2 1 169 170 171 expr=sub(@0,mul(@1,64)) #169=(1,17)i64 #170=(1,17)i64 #171=(1,17)i64
-torch.cat                torch.cat_22             2 1 170 171 172 dim=0 #170=(1,17)i64 #171=(1,17)i64 #172=(2,17)i64
-Tensor.view              Tensor.view_17           1 1 166 173 shape=(-1,17) $input=166 #166=(64,64,17)f32 #173=(4096,17)f32
+pnnx.Expression          pnnx_expr_38             3 1 166 161 163 167 expr=div(@0,add(sqrt(add(mul(@1,@1),mul(@2,@2))),1.800000e+00)) #166=(64,64,17)f32 #161=(64,64,17)f32 #163=(64,64,17)f32 #167=(64,64,17)f32
+Tensor.reshape           Tensor.reshape_8         1 1 167 168 shape=(1,4096,17) $input=167 #167=(64,64,17)f32 #168=(1,4096,17)f32
+torch.argmax             torch.argmax_19          1 1 168 169 dim=1 keepdim=False $input=168 #168=(1,4096,17)f32 #169=(1,17)i64
+pnnx.Expression          pnnx_expr_30             1 1 169 170 expr=div(@0,64) #169=(1,17)i64 #170=(1,17)i64
+pnnx.Expression          pnnx_expr_26             2 1 169 170 171 expr=sub(@0,mul(@1,64)) #169=(1,17)i64 #170=(1,17)i64 #171=(1,17)i64
+torch.cat                torch.cat_21             2 1 170 171 172 dim=0 #170=(1,17)i64 #171=(1,17)i64 #172=(2,17)i64
+Tensor.view              Tensor.view_16           1 1 166 173 shape=(-1,17) $input=166 #166=(64,64,17)f32 #173=(4096,17)f32
 torch.gather             torch.gather_25          2 1 173 169 174 dim=0 $input=173 $index=169 #173=(4096,17)f32 #169=(1,17)i64 #174=(1,17)f32
-torch.unsqueeze          torch.unsqueeze_40       1 1 169 175 dim=2 $input=169 #169=(1,17)i64 #175=(1,17,1)i64
-Tensor.expand            Tensor.expand_6          1 1 175 176 shape=(1,17,2) $input=175 #175=(1,17,1)i64 #176=(1,17,2)i64
-torch.squeeze            torch.squeeze_35         1 1 140 177 dim=0 $input=140 #140=(1,34,64,64)f32 #177=(34,64,64)f32
-torch.permute            torch.permute_30         1 1 177 178 dims=(1,2,0) $input=177 #177=(34,64,64)f32 #178=(64,64,34)f32
-Tensor.view              Tensor.view_18           1 1 178 179 shape=(-1,17,2) $input=178 #178=(64,64,34)f32 #179=(4096,17,2)f32
-torch.gather             torch.gather_26          2 1 179 176 180 dim=0 $input=179 $index=176 #179=(4096,17,2)f32 #176=(1,17,2)i64 #180=(1,17,2)f32
+torch.unsqueeze          torch.unsqueeze_40       1 1 169 175 dim=-1 $input=169 #169=(1,17)i64 #175=(1,17,1)i64
+torch.squeeze            torch.squeeze_35         1 1 140 176 dim=0 $input=140 #140=(1,34,64,64)f32 #176=(34,64,64)f32
+torch.permute            torch.permute_30         1 1 176 177 dims=(1,2,0) $input=176 #176=(34,64,64)f32 #177=(64,64,34)f32
+Tensor.view              Tensor.view_17           1 1 177 178 shape=(-1,17,2) $input=177 #177=(64,64,34)f32 #178=(4096,17,2)f32
+torch.cat                torch.cat_22             2 1 175 175 179 dim=-1 #175=(1,17,1)i64 #175=(1,17,1)i64 #179=(1,17,2)i64
+torch.gather             torch.gather_26          2 1 178 179 180 dim=0 $input=178 $index=179 #178=(4096,17,2)f32 #179=(1,17,2)i64 #180=(1,17,2)f32
 torch.permute            torch.permute_31         1 1 172 181 dims=(1,0) $input=172 #172=(2,17)i64 #181=(17,2)i64
 torch.squeeze            torch.squeeze_38         1 1 180 182 dim=0 $input=180 #180=(1,17,2)f32 #182=(17,2)f32
 pnnx.Expression          pnnx_expr_6              2 1 182 181 183 expr=mul(add(@0,@1),1.562500e-02) #182=(17,2)f32 #181=(17,2)i64 #183=(17,2)f32
 torch.squeeze            torch.squeeze_37         1 1 174 184 dim=0 $input=174 #174=(1,17)f32 #184=(17)f32
 torch.unsqueeze          torch.unsqueeze_41       1 1 184 185 dim=1 $input=184 #184=(17)f32 #185=(17,1)f32
 torch.cat                torch.cat_23             2 1 183 185 186 dim=1 #183=(17,2)f32 #185=(17,1)f32 #186=(17,3)f32
-Tensor.reshape           Tensor.reshape_10        1 1 186 187 shape=(1,1,17,3) $input=186 #186=(17,3)f32 #187=(1,1,17,3)f32
+Tensor.reshape           Tensor.reshape_9         1 1 186 187 shape=(1,1,17,3) $input=186 #186=(17,3)f32 #187=(1,1,17,3)f32
 pnnx.Output              pnnx_output_0            1 0 187 #187=(1,1,17,3)f32
