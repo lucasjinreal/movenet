@@ -20,6 +20,8 @@ def demo(opt):
     traced_m = torch.jit.trace(model, [a])
     traced_m.save('movenet.pt')
 
+    torch.onnx.export(model, a, 'movenet.onnx', opset_version=13)
+
 
 
 if __name__ == "__main__":

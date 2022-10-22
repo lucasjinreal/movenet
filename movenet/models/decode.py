@@ -11,6 +11,7 @@ from .utils import (
     _transpose_and_gather_feat,
     _transpose_and_gather_feat_plus,
 )
+from alfred import print_shape
 
 
 def _nms(heat, kernel=3):
@@ -312,6 +313,7 @@ def single_pose_decode(heat, wh, kps, reg=None, hm_hp=None, hp_offset=None, K=1)
         hm_score = (1 - mask) * -1 + mask * hm_score
         hm_ys = (1 - mask) * (-10000) + mask * hm_ys
         hm_xs = (1 - mask) * (-10000) + mask * hm_xs
+        print_shape(hm_ys, hm_xs)
         hm_kps = (
             torch.stack([hm_xs, hm_ys], dim=-1)
             .unsqueeze(2)

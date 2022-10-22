@@ -179,11 +179,15 @@ class MoveNet(nn.Module):
         ct_x = ct_ind - ct_y * ft_size
 
         kpt_regress = kpt_regress.view(-1, self.num_joints, 2)
-        ct_ind = ct_ind.unsqueeze(2).expand(ct_ind.size(0), self.num_joints, 2)
+        print_shape(ct_ind)
+        # ct_ind = ct_ind.unsqueeze(-1)
+        # ct_ind = torch.concat([ct_ind, ct_ind], dim=-1)
+        # ct_ind = ct_ind.unsqueeze(2).expand(ct_ind.size(0), self.num_joints, 2)
+        ct_ind = ct_ind.unsqueeze(2).repeat(ct_ind.size(0), self.num_joints, 2)
+        print_shape(ct_ind)
+        
         kpt_coor = kpt_regress.gather(0, ct_ind).squeeze(0)
-
         kpt_coor = kpt_coor + torch.cat((ct_y, ct_x), dim=1)
-
         return kpt_coor
 
     def _kpt_from_heatmap(self, kpt_heatmap, kpt_coor):
@@ -201,15 +205,20 @@ class MoveNet(nn.Module):
         kpts_ys = torch.div(kpt_top_inds, size, rounding_mode="floor")
         # kpts_ys = (kpt_top_inds.float() / size).int().float()
         kpts_xs = kpt_top_inds - kpts_ys * size
-        kpt_coordinate = torch.stack((kpts_ys.squeeze(0), kpts_xs.squeeze(0)), dim=1)
+        # kpt_coordinate = torch.stack((kpts_ys.squeeze(0), kpts_xs.squeeze(0)), dim=1)
+        kpt_coordinate = torch.concat([kpts_ys, kpts_xs], dim=0).permute(1, 0)
+        print_shape(kpt_coordinate, kpts_ys, kpts_xs)
 
         kpt_heatmap = kpt_heatmap.view(-1, self.num_joints)
         kpt_conf = kpt_heatmap.gather(0, kpt_top_inds).squeeze(0)
 
         kpt_offset = kpt_offset.view(-1, self.num_joints, 2)
-        kpt_top_inds = kpt_top_inds.unsqueeze(2).expand(
-            kpt_top_inds.size(0), self.num_joints, 2
-        )
+
+        kpt_top_inds = kpt_top_inds.unsqueeze(-1)
+        kpt_top_inds = torch.concat([kpt_top_inds, kpt_top_inds], dim=-1)
+        # kpt_top_inds = kpt_top_inds.unsqueeze(2).expand(
+        #     kpt_top_inds.size(0), self.num_joints, 2
+        # )
         kpt_offset_yx = kpt_offset.gather(0, kpt_top_inds).squeeze(0)
 
         kpt_coordinate = (kpt_offset_yx + kpt_coordinate) * (1 / size)
