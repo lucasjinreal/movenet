@@ -4,6 +4,8 @@ import torch
 from movenet.opts import opts
 from movenet.detectors.detector_factory import detector_factory
 
+torch.set_grad_enabled(False)
+
 image_ext = ["jpg", "jpeg", "png", "webp"]
 video_ext = ["mp4", "mov", "avi", "mkv"]
 time_stats = ["tot", "load", "pre", "net", "dec", "post", "merge"]
@@ -20,7 +22,14 @@ def demo(opt):
     traced_m = torch.jit.trace(model, [a])
     traced_m.save('movenet.pt')
 
+    o = traced_m(a)
+    print(o)
+
     torch.onnx.export(model, a, 'movenet.onnx', opset_version=13)
+
+    a.numpy().tofile('data0.bin')
+    o.numpy().tofile('gt.bin')
+    
 
 
 
