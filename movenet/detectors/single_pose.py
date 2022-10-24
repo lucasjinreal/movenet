@@ -37,7 +37,6 @@ class SinglePoseDetector(BaseDetector):
             dets = self.model.decode(output)
             # torch.cuda.synchronize()
             forward_time = time.time()
-
         if return_time:
             return output, dets, forward_time
         else:
