@@ -3,6 +3,10 @@ import cv2
 import torch
 from movenet.opts import opts
 from movenet.detectors.detector_factory import detector_factory
+from alfred import print_shape
+
+torch.set_grad_enabled(False)
+torch.manual_seed(10234)
 
 image_ext = ["jpg", "jpeg", "png", "webp"]
 video_ext = ["mp4", "mov", "avi", "mkv"]
@@ -16,12 +20,19 @@ def demo(opt):
     detector = Detector(opt)
 
     model = detector.model
+    model.eval()
     a = torch.randn([1, 3, 256, 256])
     traced_m = torch.jit.trace(model, [a])
-    traced_m.save('movenet.pt')
+    traced_m.save("movenet.pt")
+    torch.onnx.export(model, a, "movenet.onnx", opset_version=13)
 
-    torch.onnx.export(model, a, 'movenet.onnx', opset_version=13)
+    o = traced_m(a)
 
+    a.numpy().tofile("data0.bin")
+    o.numpy().tofile("gt.bin")
+
+    print(o)
+    print_shape(a, o)
 
 
 if __name__ == "__main__":

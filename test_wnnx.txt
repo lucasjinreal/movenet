@@ -1,0 +1,152 @@
+7767517
+150 149
+pnnx.Input               pnnx_input_0             0 1 0 #0=(1,3,256,256)f32
+pnnx.Attribute           pnnx_5                   0 1 1 @pnnx_5=(64,64,1)f32 #1=(64,64,1)f32
+nn.ZeroPad2d             backbone.body.0.0        1 1 0 2 padding=(0,1,0,1) #0=(1,3,256,256)f32 #2=(1,3,257,257)f32
+nn.Conv2d                backbone.body.0.1        1 1 2 3 bias=True dilation=(1,1) groups=1 in_channels=3 kernel_size=(3,3) out_channels=32 padding=(0,0) padding_mode=zeros stride=(2,2) @bias=(32)f32 @weight=(32,3,3,3)f32 #2=(1,3,257,257)f32 #3=(1,32,128,128)f32
+nn.ReLU6                 backbone.body.0.2        1 1 3 4 #3=(1,32,128,128)f32 #4=(1,32,128,128)f32
+nn.Conv2d                backbone.body.1.conv.0.0 1 1 4 5 bias=True dilation=(1,1) groups=32 in_channels=32 kernel_size=(3,3) out_channels=32 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,1,3,3)f32 #4=(1,32,128,128)f32 #5=(1,32,128,128)f32
+nn.ReLU6                 backbone.body.1.conv.0.1 1 1 5 6 #5=(1,32,128,128)f32 #6=(1,32,128,128)f32
+nn.Conv2d                backbone.body.1.conv.1   1 1 6 7 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=16 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(16)f32 @weight=(16,32,1,1)f32 #6=(1,32,128,128)f32 #7=(1,16,128,128)f32
+nn.Conv2d                backbone.body.2.conv.0.0 1 1 7 8 bias=True dilation=(1,1) groups=1 in_channels=16 kernel_size=(1,1) out_channels=96 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(96)f32 @weight=(96,16,1,1)f32 #7=(1,16,128,128)f32 #8=(1,96,128,128)f32
+nn.ReLU6                 backbone.body.2.conv.0.1 1 1 8 9 #8=(1,96,128,128)f32 #9=(1,96,128,128)f32
+nn.ZeroPad2d             backbone.body.2.conv.1.0 1 1 9 10 padding=(0,1,0,1) #9=(1,96,128,128)f32 #10=(1,96,129,129)f32
+nn.Conv2d                backbone.body.2.conv.1.1 1 1 10 11 bias=True dilation=(1,1) groups=96 in_channels=96 kernel_size=(3,3) out_channels=96 padding=(0,0) padding_mode=zeros stride=(2,2) @bias=(96)f32 @weight=(96,1,3,3)f32 #10=(1,96,129,129)f32 #11=(1,96,64,64)f32
+nn.ReLU6                 backbone.body.2.conv.1.2 1 1 11 12 #11=(1,96,64,64)f32 #12=(1,96,64,64)f32
+nn.Conv2d                backbone.body.2.conv.2   1 1 12 13 bias=True dilation=(1,1) groups=1 in_channels=96 kernel_size=(1,1) out_channels=24 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,96,1,1)f32 #12=(1,96,64,64)f32 #13=(1,24,64,64)f32
+nn.Conv2d                backbone.body.3.conv.0.0 1 1 13 14 bias=True dilation=(1,1) groups=1 in_channels=24 kernel_size=(1,1) out_channels=144 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(144)f32 @weight=(144,24,1,1)f32 #13=(1,24,64,64)f32 #14=(1,144,64,64)f32
+nn.ReLU6                 backbone.body.3.conv.0.1 1 1 14 15 #14=(1,144,64,64)f32 #15=(1,144,64,64)f32
+nn.Conv2d                backbone.body.3.conv.1.0 1 1 15 16 bias=True dilation=(1,1) groups=144 in_channels=144 kernel_size=(3,3) out_channels=144 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(144)f32 @weight=(144,1,3,3)f32 #15=(1,144,64,64)f32 #16=(1,144,64,64)f32
+nn.ReLU6                 backbone.body.3.conv.1.1 1 1 16 17 #16=(1,144,64,64)f32 #17=(1,144,64,64)f32
+nn.Conv2d                backbone.body.3.conv.2   1 1 17 18 bias=True dilation=(1,1) groups=1 in_channels=144 kernel_size=(1,1) out_channels=24 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,144,1,1)f32 #17=(1,144,64,64)f32 #18=(1,24,64,64)f32
+BinaryOp                 add_0                    2 1 13 18 19 0=0 #13=(1,24,64,64)f32 #18=(1,24,64,64)f32 #19=(1,24,64,64)f32
+nn.Conv2d                backbone.body.4.conv.0.0 1 1 19 20 bias=True dilation=(1,1) groups=1 in_channels=24 kernel_size=(1,1) out_channels=144 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(144)f32 @weight=(144,24,1,1)f32 #19=(1,24,64,64)f32 #20=(1,144,64,64)f32
+nn.ReLU6                 backbone.body.4.conv.0.1 1 1 20 21 #20=(1,144,64,64)f32 #21=(1,144,64,64)f32
+nn.ZeroPad2d             backbone.body.4.conv.1.0 1 1 21 22 padding=(0,1,0,1) #21=(1,144,64,64)f32 #22=(1,144,65,65)f32
+nn.Conv2d                backbone.body.4.conv.1.1 1 1 22 23 bias=True dilation=(1,1) groups=144 in_channels=144 kernel_size=(3,3) out_channels=144 padding=(0,0) padding_mode=zeros stride=(2,2) @bias=(144)f32 @weight=(144,1,3,3)f32 #22=(1,144,65,65)f32 #23=(1,144,32,32)f32
+nn.ReLU6                 backbone.body.4.conv.1.2 1 1 23 24 #23=(1,144,32,32)f32 #24=(1,144,32,32)f32
+nn.Conv2d                backbone.body.4.conv.2   1 1 24 25 bias=True dilation=(1,1) groups=1 in_channels=144 kernel_size=(1,1) out_channels=32 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,144,1,1)f32 #24=(1,144,32,32)f32 #25=(1,32,32,32)f32
+nn.Conv2d                backbone.body.5.conv.0.0 1 1 25 26 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=192 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(192)f32 @weight=(192,32,1,1)f32 #25=(1,32,32,32)f32 #26=(1,192,32,32)f32
+nn.ReLU6                 backbone.body.5.conv.0.1 1 1 26 27 #26=(1,192,32,32)f32 #27=(1,192,32,32)f32
+nn.Conv2d                backbone.body.5.conv.1.0 1 1 27 28 bias=True dilation=(1,1) groups=192 in_channels=192 kernel_size=(3,3) out_channels=192 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(192)f32 @weight=(192,1,3,3)f32 #27=(1,192,32,32)f32 #28=(1,192,32,32)f32
+nn.ReLU6                 backbone.body.5.conv.1.1 1 1 28 29 #28=(1,192,32,32)f32 #29=(1,192,32,32)f32
+nn.Conv2d                backbone.body.5.conv.2   1 1 29 30 bias=True dilation=(1,1) groups=1 in_channels=192 kernel_size=(1,1) out_channels=32 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,192,1,1)f32 #29=(1,192,32,32)f32 #30=(1,32,32,32)f32
+BinaryOp                 add_1                    2 1 25 30 31 0=0 #25=(1,32,32,32)f32 #30=(1,32,32,32)f32 #31=(1,32,32,32)f32
+nn.Conv2d                backbone.body.6.conv.0.0 1 1 31 32 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=192 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(192)f32 @weight=(192,32,1,1)f32 #31=(1,32,32,32)f32 #32=(1,192,32,32)f32
+nn.ReLU6                 backbone.body.6.conv.0.1 1 1 32 33 #32=(1,192,32,32)f32 #33=(1,192,32,32)f32
+nn.Conv2d                backbone.body.6.conv.1.0 1 1 33 34 bias=True dilation=(1,1) groups=192 in_channels=192 kernel_size=(3,3) out_channels=192 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(192)f32 @weight=(192,1,3,3)f32 #33=(1,192,32,32)f32 #34=(1,192,32,32)f32
+nn.ReLU6                 backbone.body.6.conv.1.1 1 1 34 35 #34=(1,192,32,32)f32 #35=(1,192,32,32)f32
+nn.Conv2d                backbone.body.6.conv.2   1 1 35 36 bias=True dilation=(1,1) groups=1 in_channels=192 kernel_size=(1,1) out_channels=32 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,192,1,1)f32 #35=(1,192,32,32)f32 #36=(1,32,32,32)f32
+BinaryOp                 add_2                    2 1 31 36 37 0=0 #31=(1,32,32,32)f32 #36=(1,32,32,32)f32 #37=(1,32,32,32)f32
+nn.Conv2d                backbone.body.7.conv.0.0 1 1 37 38 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=192 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(192)f32 @weight=(192,32,1,1)f32 #37=(1,32,32,32)f32 #38=(1,192,32,32)f32
+nn.ReLU6                 backbone.body.7.conv.0.1 1 1 38 39 #38=(1,192,32,32)f32 #39=(1,192,32,32)f32
+nn.ZeroPad2d             backbone.body.7.conv.1.0 1 1 39 40 padding=(0,1,0,1) #39=(1,192,32,32)f32 #40=(1,192,33,33)f32
+nn.Conv2d                backbone.body.7.conv.1.1 1 1 40 41 bias=True dilation=(1,1) groups=192 in_channels=192 kernel_size=(3,3) out_channels=192 padding=(0,0) padding_mode=zeros stride=(2,2) @bias=(192)f32 @weight=(192,1,3,3)f32 #40=(1,192,33,33)f32 #41=(1,192,16,16)f32
+nn.ReLU6                 backbone.body.7.conv.1.2 1 1 41 42 #41=(1,192,16,16)f32 #42=(1,192,16,16)f32
+nn.Conv2d                backbone.body.7.conv.2   1 1 42 43 bias=True dilation=(1,1) groups=1 in_channels=192 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,192,1,1)f32 #42=(1,192,16,16)f32 #43=(1,64,16,16)f32
+nn.Conv2d                backbone.body.8.conv.0.0 1 1 43 44 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=384 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,64,1,1)f32 #43=(1,64,16,16)f32 #44=(1,384,16,16)f32
+nn.ReLU6                 backbone.body.8.conv.0.1 1 1 44 45 #44=(1,384,16,16)f32 #45=(1,384,16,16)f32
+nn.Conv2d                backbone.body.8.conv.1.0 1 1 45 46 bias=True dilation=(1,1) groups=384 in_channels=384 kernel_size=(3,3) out_channels=384 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,1,3,3)f32 #45=(1,384,16,16)f32 #46=(1,384,16,16)f32
+nn.ReLU6                 backbone.body.8.conv.1.1 1 1 46 47 #46=(1,384,16,16)f32 #47=(1,384,16,16)f32
+nn.Conv2d                backbone.body.8.conv.2   1 1 47 48 bias=True dilation=(1,1) groups=1 in_channels=384 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,384,1,1)f32 #47=(1,384,16,16)f32 #48=(1,64,16,16)f32
+BinaryOp                 add_3                    2 1 43 48 49 0=0 #43=(1,64,16,16)f32 #48=(1,64,16,16)f32 #49=(1,64,16,16)f32
+nn.Conv2d                backbone.body.9.conv.0.0 1 1 49 50 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=384 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,64,1,1)f32 #49=(1,64,16,16)f32 #50=(1,384,16,16)f32
+nn.ReLU6                 backbone.body.9.conv.0.1 1 1 50 51 #50=(1,384,16,16)f32 #51=(1,384,16,16)f32
+nn.Conv2d                backbone.body.9.conv.1.0 1 1 51 52 bias=True dilation=(1,1) groups=384 in_channels=384 kernel_size=(3,3) out_channels=384 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,1,3,3)f32 #51=(1,384,16,16)f32 #52=(1,384,16,16)f32
+nn.ReLU6                 backbone.body.9.conv.1.1 1 1 52 53 #52=(1,384,16,16)f32 #53=(1,384,16,16)f32
+nn.Conv2d                backbone.body.9.conv.2   1 1 53 54 bias=True dilation=(1,1) groups=1 in_channels=384 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,384,1,1)f32 #53=(1,384,16,16)f32 #54=(1,64,16,16)f32
+BinaryOp                 add_4                    2 1 49 54 55 0=0 #49=(1,64,16,16)f32 #54=(1,64,16,16)f32 #55=(1,64,16,16)f32
+nn.Conv2d                backbone.body.10.conv.0.0 1 1 55 56 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=384 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,64,1,1)f32 #55=(1,64,16,16)f32 #56=(1,384,16,16)f32
+nn.ReLU6                 backbone.body.10.conv.0.1 1 1 56 57 #56=(1,384,16,16)f32 #57=(1,384,16,16)f32
+nn.Conv2d                backbone.body.10.conv.1.0 1 1 57 58 bias=True dilation=(1,1) groups=384 in_channels=384 kernel_size=(3,3) out_channels=384 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,1,3,3)f32 #57=(1,384,16,16)f32 #58=(1,384,16,16)f32
+nn.ReLU6                 backbone.body.10.conv.1.1 1 1 58 59 #58=(1,384,16,16)f32 #59=(1,384,16,16)f32
+nn.Conv2d                backbone.body.10.conv.2  1 1 59 60 bias=True dilation=(1,1) groups=1 in_channels=384 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,384,1,1)f32 #59=(1,384,16,16)f32 #60=(1,64,16,16)f32
+BinaryOp                 add_5                    2 1 55 60 61 0=0 #55=(1,64,16,16)f32 #60=(1,64,16,16)f32 #61=(1,64,16,16)f32
+nn.Conv2d                backbone.body.11.conv.0.0 1 1 61 62 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=384 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,64,1,1)f32 #61=(1,64,16,16)f32 #62=(1,384,16,16)f32
+nn.ReLU6                 backbone.body.11.conv.0.1 1 1 62 63 #62=(1,384,16,16)f32 #63=(1,384,16,16)f32
+nn.Conv2d                backbone.body.11.conv.1.0 1 1 63 64 bias=True dilation=(1,1) groups=384 in_channels=384 kernel_size=(3,3) out_channels=384 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(384)f32 @weight=(384,1,3,3)f32 #63=(1,384,16,16)f32 #64=(1,384,16,16)f32
+nn.ReLU6                 backbone.body.11.conv.1.1 1 1 64 65 #64=(1,384,16,16)f32 #65=(1,384,16,16)f32
+nn.Conv2d                backbone.body.11.conv.2  1 1 65 66 bias=True dilation=(1,1) groups=1 in_channels=384 kernel_size=(1,1) out_channels=96 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(96)f32 @weight=(96,384,1,1)f32 #65=(1,384,16,16)f32 #66=(1,96,16,16)f32
+nn.Conv2d                backbone.body.12.conv.0.0 1 1 66 67 bias=True dilation=(1,1) groups=1 in_channels=96 kernel_size=(1,1) out_channels=576 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(576)f32 @weight=(576,96,1,1)f32 #66=(1,96,16,16)f32 #67=(1,576,16,16)f32
+nn.ReLU6                 backbone.body.12.conv.0.1 1 1 67 68 #67=(1,576,16,16)f32 #68=(1,576,16,16)f32
+nn.Conv2d                backbone.body.12.conv.1.0 1 1 68 69 bias=True dilation=(1,1) groups=576 in_channels=576 kernel_size=(3,3) out_channels=576 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(576)f32 @weight=(576,1,3,3)f32 #68=(1,576,16,16)f32 #69=(1,576,16,16)f32
+nn.ReLU6                 backbone.body.12.conv.1.1 1 1 69 70 #69=(1,576,16,16)f32 #70=(1,576,16,16)f32
+nn.Conv2d                backbone.body.12.conv.2  1 1 70 71 bias=True dilation=(1,1) groups=1 in_channels=576 kernel_size=(1,1) out_channels=96 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(96)f32 @weight=(96,576,1,1)f32 #70=(1,576,16,16)f32 #71=(1,96,16,16)f32
+BinaryOp                 add_6                    2 1 66 71 72 0=0 #66=(1,96,16,16)f32 #71=(1,96,16,16)f32 #72=(1,96,16,16)f32
+nn.Conv2d                backbone.body.13.conv.0.0 1 1 72 73 bias=True dilation=(1,1) groups=1 in_channels=96 kernel_size=(1,1) out_channels=576 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(576)f32 @weight=(576,96,1,1)f32 #72=(1,96,16,16)f32 #73=(1,576,16,16)f32
+nn.ReLU6                 backbone.body.13.conv.0.1 1 1 73 74 #73=(1,576,16,16)f32 #74=(1,576,16,16)f32
+nn.Conv2d                backbone.body.13.conv.1.0 1 1 74 75 bias=True dilation=(1,1) groups=576 in_channels=576 kernel_size=(3,3) out_channels=576 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(576)f32 @weight=(576,1,3,3)f32 #74=(1,576,16,16)f32 #75=(1,576,16,16)f32
+nn.ReLU6                 backbone.body.13.conv.1.1 1 1 75 76 #75=(1,576,16,16)f32 #76=(1,576,16,16)f32
+nn.Conv2d                backbone.body.13.conv.2  1 1 76 77 bias=True dilation=(1,1) groups=1 in_channels=576 kernel_size=(1,1) out_channels=96 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(96)f32 @weight=(96,576,1,1)f32 #76=(1,576,16,16)f32 #77=(1,96,16,16)f32
+BinaryOp                 add_7                    2 1 72 77 78 0=0 #72=(1,96,16,16)f32 #77=(1,96,16,16)f32 #78=(1,96,16,16)f32
+nn.Conv2d                backbone.body.14.conv.0.0 1 1 78 79 bias=True dilation=(1,1) groups=1 in_channels=96 kernel_size=(1,1) out_channels=576 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(576)f32 @weight=(576,96,1,1)f32 #78=(1,96,16,16)f32 #79=(1,576,16,16)f32
+nn.ReLU6                 backbone.body.14.conv.0.1 1 1 79 80 #79=(1,576,16,16)f32 #80=(1,576,16,16)f32
+nn.ZeroPad2d             backbone.body.14.conv.1.0 1 1 80 81 padding=(0,1,0,1) #80=(1,576,16,16)f32 #81=(1,576,17,17)f32
+nn.Conv2d                backbone.body.14.conv.1.1 1 1 81 82 bias=True dilation=(1,1) groups=576 in_channels=576 kernel_size=(3,3) out_channels=576 padding=(0,0) padding_mode=zeros stride=(2,2) @bias=(576)f32 @weight=(576,1,3,3)f32 #81=(1,576,17,17)f32 #82=(1,576,8,8)f32
+nn.ReLU6                 backbone.body.14.conv.1.2 1 1 82 83 #82=(1,576,8,8)f32 #83=(1,576,8,8)f32
+nn.Conv2d                backbone.body.14.conv.2  1 1 83 84 bias=True dilation=(1,1) groups=1 in_channels=576 kernel_size=(1,1) out_channels=160 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(160)f32 @weight=(160,576,1,1)f32 #83=(1,576,8,8)f32 #84=(1,160,8,8)f32
+nn.Conv2d                backbone.body.15.conv.0.0 1 1 84 85 bias=True dilation=(1,1) groups=1 in_channels=160 kernel_size=(1,1) out_channels=960 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,160,1,1)f32 #84=(1,160,8,8)f32 #85=(1,960,8,8)f32
+nn.ReLU6                 backbone.body.15.conv.0.1 1 1 85 86 #85=(1,960,8,8)f32 #86=(1,960,8,8)f32
+nn.Conv2d                backbone.body.15.conv.1.0 1 1 86 87 bias=True dilation=(1,1) groups=960 in_channels=960 kernel_size=(3,3) out_channels=960 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,1,3,3)f32 #86=(1,960,8,8)f32 #87=(1,960,8,8)f32
+nn.ReLU6                 backbone.body.15.conv.1.1 1 1 87 88 #87=(1,960,8,8)f32 #88=(1,960,8,8)f32
+nn.Conv2d                backbone.body.15.conv.2  1 1 88 89 bias=True dilation=(1,1) groups=1 in_channels=960 kernel_size=(1,1) out_channels=160 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(160)f32 @weight=(160,960,1,1)f32 #88=(1,960,8,8)f32 #89=(1,160,8,8)f32
+BinaryOp                 add_8                    2 1 84 89 90 0=0 #84=(1,160,8,8)f32 #89=(1,160,8,8)f32 #90=(1,160,8,8)f32
+nn.Conv2d                backbone.body.16.conv.0.0 1 1 90 91 bias=True dilation=(1,1) groups=1 in_channels=160 kernel_size=(1,1) out_channels=960 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,160,1,1)f32 #90=(1,160,8,8)f32 #91=(1,960,8,8)f32
+nn.ReLU6                 backbone.body.16.conv.0.1 1 1 91 92 #91=(1,960,8,8)f32 #92=(1,960,8,8)f32
+nn.Conv2d                backbone.body.16.conv.1.0 1 1 92 93 bias=True dilation=(1,1) groups=960 in_channels=960 kernel_size=(3,3) out_channels=960 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,1,3,3)f32 #92=(1,960,8,8)f32 #93=(1,960,8,8)f32
+nn.ReLU6                 backbone.body.16.conv.1.1 1 1 93 94 #93=(1,960,8,8)f32 #94=(1,960,8,8)f32
+nn.Conv2d                backbone.body.16.conv.2  1 1 94 95 bias=True dilation=(1,1) groups=1 in_channels=960 kernel_size=(1,1) out_channels=160 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(160)f32 @weight=(160,960,1,1)f32 #94=(1,960,8,8)f32 #95=(1,160,8,8)f32
+BinaryOp                 add_9                    2 1 90 95 96 0=0 #90=(1,160,8,8)f32 #95=(1,160,8,8)f32 #96=(1,160,8,8)f32
+nn.Conv2d                backbone.body.17.conv.0.0 1 1 96 97 bias=True dilation=(1,1) groups=1 in_channels=160 kernel_size=(1,1) out_channels=960 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,160,1,1)f32 #96=(1,160,8,8)f32 #97=(1,960,8,8)f32
+nn.ReLU6                 backbone.body.17.conv.0.1 1 1 97 98 #97=(1,960,8,8)f32 #98=(1,960,8,8)f32
+nn.Conv2d                backbone.body.17.conv.1.0 1 1 98 99 bias=True dilation=(1,1) groups=960 in_channels=960 kernel_size=(3,3) out_channels=960 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(960)f32 @weight=(960,1,3,3)f32 #98=(1,960,8,8)f32 #99=(1,960,8,8)f32
+nn.ReLU6                 backbone.body.17.conv.1.1 1 1 99 100 #99=(1,960,8,8)f32 #100=(1,960,8,8)f32
+nn.Conv2d                backbone.body.17.conv.2  1 1 100 101 bias=True dilation=(1,1) groups=1 in_channels=960 kernel_size=(1,1) out_channels=320 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(320)f32 @weight=(320,960,1,1)f32 #100=(1,960,8,8)f32 #101=(1,320,8,8)f32
+nn.Conv2d                backbone.body.18.0       1 1 101 102 bias=True dilation=(1,1) groups=1 in_channels=320 kernel_size=(1,1) out_channels=1280 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(1280)f32 @weight=(1280,320,1,1)f32 #101=(1,320,8,8)f32 #102=(1,1280,8,8)f32
+nn.ReLU6                 backbone.body.18.1       1 1 102 103 #102=(1,1280,8,8)f32 #103=(1,1280,8,8)f32
+nn.Conv2d                backbone.fpn.inner_blocks.3 1 1 103 104 bias=True dilation=(1,1) groups=1 in_channels=1280 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,1280,1,1)f32 #103=(1,1280,8,8)f32 #104=(1,64,8,8)f32
+nn.Conv2d                backbone.fpn.inner_blocks.2 1 1 61 105 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=64 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,64,1,1)f32 #61=(1,64,16,16)f32 #105=(1,64,16,16)f32
+F.upsample               F.upsample_1             1 1 104 106 align_corners=False mode=bilinear scale_factor=(2.000000e+00,2.000000e+00) $input=104 #104=(1,64,8,8)f32 #106=(1,64,16,16)f32
+BinaryOp                 add_10                   2 1 105 106 107 0=0 #105=(1,64,16,16)f32 #106=(1,64,16,16)f32 #107=(1,64,16,16)f32
+nn.Conv2d                backbone.fpn.layer_blocks.2.conv.0 1 1 107 108 bias=True dilation=(1,1) groups=64 in_channels=64 kernel_size=(3,3) out_channels=64 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,1,3,3)f32 #107=(1,64,16,16)f32 #108=(1,64,16,16)f32
+nn.Conv2d                backbone.fpn.layer_blocks.2.conv.1 1 1 108 109 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(1,1) out_channels=32 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,64,1,1)f32 #108=(1,64,16,16)f32 #109=(1,32,16,16)f32
+nn.ReLU                  backbone.fpn.layer_blocks.2.conv.2 1 1 109 110 #109=(1,32,16,16)f32 #110=(1,32,16,16)f32
+nn.Conv2d                backbone.fpn.inner_blocks.1 1 1 37 111 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=32 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,32,1,1)f32 #37=(1,32,32,32)f32 #111=(1,32,32,32)f32
+F.upsample               F.upsample_2             1 1 110 112 align_corners=False mode=bilinear scale_factor=(2.000000e+00,2.000000e+00) $input=110 #110=(1,32,16,16)f32 #112=(1,32,32,32)f32
+BinaryOp                 add_11                   2 1 111 112 113 0=0 #111=(1,32,32,32)f32 #112=(1,32,32,32)f32 #113=(1,32,32,32)f32
+nn.Conv2d                backbone.fpn.layer_blocks.1.conv.0 1 1 113 114 bias=True dilation=(1,1) groups=32 in_channels=32 kernel_size=(3,3) out_channels=32 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,1,3,3)f32 #113=(1,32,32,32)f32 #114=(1,32,32,32)f32
+nn.Conv2d                backbone.fpn.layer_blocks.1.conv.1 1 1 114 115 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(1,1) out_channels=24 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,32,1,1)f32 #114=(1,32,32,32)f32 #115=(1,24,32,32)f32
+nn.ReLU                  backbone.fpn.layer_blocks.1.conv.2 1 1 115 116 #115=(1,24,32,32)f32 #116=(1,24,32,32)f32
+nn.Conv2d                backbone.fpn.inner_blocks.0 1 1 19 117 bias=True dilation=(1,1) groups=1 in_channels=24 kernel_size=(1,1) out_channels=24 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,24,1,1)f32 #19=(1,24,64,64)f32 #117=(1,24,64,64)f32
+F.upsample               F.upsample_3             1 1 116 118 align_corners=False mode=bilinear scale_factor=(2.000000e+00,2.000000e+00) $input=116 #116=(1,24,32,32)f32 #118=(1,24,64,64)f32
+BinaryOp                 add_12                   2 1 117 118 119 0=0 #117=(1,24,64,64)f32 #118=(1,24,64,64)f32 #119=(1,24,64,64)f32
+nn.Conv2d                backbone.fpn.layer_blocks.0.conv.0 1 1 119 120 bias=True dilation=(1,1) groups=24 in_channels=24 kernel_size=(3,3) out_channels=24 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,1,3,3)f32 #119=(1,24,64,64)f32 #120=(1,24,64,64)f32
+nn.Conv2d                backbone.fpn.layer_blocks.0.conv.1 1 1 120 121 bias=True dilation=(1,1) groups=1 in_channels=24 kernel_size=(1,1) out_channels=24 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,24,1,1)f32 #120=(1,24,64,64)f32 #121=(1,24,64,64)f32
+nn.ReLU                  backbone.fpn.layer_blocks.0.conv.2 1 1 121 122 #121=(1,24,64,64)f32 #122=(1,24,64,64)f32
+nn.Conv2d                hm.0                     1 1 122 123 bias=True dilation=(1,1) groups=24 in_channels=24 kernel_size=(3,3) out_channels=24 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,1,3,3)f32 #122=(1,24,64,64)f32 #123=(1,24,64,64)f32
+nn.Conv2d                hm.1                     1 1 123 124 bias=True dilation=(1,1) groups=1 in_channels=24 kernel_size=(1,1) out_channels=96 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(96)f32 @weight=(96,24,1,1)f32 #123=(1,24,64,64)f32 #124=(1,96,64,64)f32
+nn.ReLU                  hm.2                     1 1 124 125 #124=(1,96,64,64)f32 #125=(1,96,64,64)f32
+nn.Conv2d                hm.3                     1 1 125 126 bias=True dilation=(1,1) groups=1 in_channels=96 kernel_size=(1,1) out_channels=1 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(1)f32 @weight=(1,96,1,1)f32 #125=(1,96,64,64)f32 #126=(1,1,64,64)f32
+nn.Conv2d                hps.0                    1 1 122 127 bias=True dilation=(1,1) groups=24 in_channels=24 kernel_size=(3,3) out_channels=24 padding=(1,1) padding_mode=zeros stride=(1,1) @bias=(24)f32 @weight=(24,1,3,3)f32 #122=(1,24,64,64)f32 #127=(1,24,64,64)f32
+nn.Conv2d                hps.1                    1 1 127 128 bias=True dilation=(1,1) groups=1 in_channels=24 kernel_size=(1,1) out_channels=96 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(96)f32 @weight=(96,24,1,1)f32 #127=(1,24,64,64)f32 #128=(1,96,64,64)f32
+nn.ReLU                  hps.2                    1 1 128 129 #128=(1,96,64,64)f32 #129=(1,96,64,64)f32
+nn.Conv2d                hps.3                    1 1 129 130 bias=True dilation=(1,1) groups=1 in_channels=96 kernel_size=(1,1) out_channels=34 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(34)f32 @weight=(34,96,1,1)f32 #129=(1,96,64,64)f32 #130=(1,34,64,64)f32
+torch.squeeze            torch.squeeze_12         1 1 126 131 dim=0 $input=126 #126=(1,1,64,64)f32 #131=(1,64,64)f32
+torch.permute            torch.permute_10         1 1 131 132 dims=(1,2,0) $input=131 #131=(1,64,64)f32 #132=(64,64,1)f32
+F.sigmoid                F.sigmoid_0              1 1 132 133 $input=132 #132=(64,64,1)f32 #133=(64,64,1)f32
+BinaryOp                 mul_13                   2 1 133 1 134 0=2 #133=(64,64,1)f32 #1=(64,64,1)f32 #134=(64,64,1)f32
+Tensor.view              Tensor.view_5            1 1 134 135 shape=(1,4096,1) $input=134 #134=(64,64,1)f32 #135=(1,4096,1)f32
+torch.argmax             torch.argmax_7           1 1 135 136 dim=1 keepdim=False $input=135 #135=(1,4096,1)f32 #136=(1,1)i64
+BinaryOp                 div_14                   1 1 136 137 0=3 1=1 2=4.800000e+01 #136=(1,1)i64 #137=(1,1)i64
+BinaryOp                 mul_15                   1 1 137 138 0=2 1=1 2=4.800000e+01 #137=(1,1)i64
+BinaryOp                 sub_16                   2 1 136 138 139 0=1 #136=(1,1)i64 #139=(1,1)i64
+torch.unsqueeze          torch.unsqueeze_15       1 1 136 140 dim=2 $input=136 #136=(1,1)i64 #140=(1,1,1)i64
+Tensor.repeat            Tensor.repeat_4          1 1 140 141 sizes=(1,17,2) $input=140 #140=(1,1,1)i64 #141=(1,17,2)i64
+torch.squeeze            torch.squeeze_13         1 1 130 142 dim=0 $input=130 #130=(1,34,64,64)f32 #142=(34,64,64)f32
+torch.permute            torch.permute_11         1 1 142 143 dims=(1,2,0) $input=142 #142=(34,64,64)f32 #143=(64,64,34)f32
+Tensor.view              Tensor.view_6            1 1 143 144 shape=(-1,17,2) $input=143 #143=(64,64,34)f32 #144=(4096,17,2)f32
+torch.gather             torch.gather_9           2 1 144 141 145 dim=0 $input=144 $index=141 #144=(4096,17,2)f32 #141=(1,17,2)i64 #145=(1,17,2)f32
+torch.cat                torch.cat_8              2 1 137 139 146 dim=1 #137=(1,1)i64 #139=(1,1)i64 #146=(1,2)i64
+torch.squeeze            torch.squeeze_14         1 1 145 147 dim=0 $input=145 #145=(1,17,2)f32 #147=(17,2)f32
+BinaryOp                 add_17                   2 1 147 146 148 0=0 #147=(17,2)f32 #146=(1,2)i64 #148=(17,2)f32
+pnnx.Output              pnnx_output_0            1 0 148 #148=(17,2)f32

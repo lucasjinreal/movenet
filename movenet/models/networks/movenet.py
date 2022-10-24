@@ -85,18 +85,19 @@ class MoveNet(nn.Module):
         self.weight_to_center = self.weight_to_center.to(device)
         self.dist_y, self.dist_x = self.dist_y.to(device), self.dist_x.to(device)
 
-        x = self.backbone(x)
+        x = self.backbone(x)  # backbone is right
+        # return x
         ret = {}
         print(self.heads)
         # return x
         for head in self.heads:
             ret[head] = self.__getattr__(head)(x)
         if torch.jit.is_tracing():
-            logger.info('in tracing mode....')
-            hm = ret['hm']
-            hm_hp = ret['hm_hp']
-            hps = ret['hps']
-            hp_offset = ret['hp_offset']
+            logger.info("in tracing mode....")
+            hm = ret["hm"]
+            hm_hp = ret["hm_hp"]
+            hps = ret["hps"]
+            hp_offset = ret["hp_offset"]
             print_shape(hm, hm_hp, hps, hp_offset)
             ret = self.decode_jit(hm_hp, hm, hps, hp_offset)
             return ret
@@ -110,12 +111,16 @@ class MoveNet(nn.Module):
             hps.squeeze(0).permute((1, 2, 0)),
             hp_offset.squeeze(0).permute((1, 2, 0)),
         )
+        # return kpt_heatmap
         # pose decode
         kpt_heatmap = torch.sigmoid(kpt_heatmap)
+        # return kpt_heatmap
         center = torch.sigmoid(center)
         print_shape(center)
         ct_ind = self._top_with_center(center)
+        print_shape(kpt_regress)
         kpt_coor = self._center_to_kpt(kpt_regress, ct_ind)
+        return kpt_coor
         kpt_top_inds = self._kpt_from_heatmap(kpt_heatmap, kpt_coor)
         kpt_with_conf = self._kpt_from_offset(
             kpt_offset, kpt_top_inds, kpt_heatmap, self.ft_size
@@ -157,26 +162,26 @@ class MoveNet(nn.Module):
         y = y - center_y
         x = x - center_x
         weight_to_center = 1 / (np.sqrt(y * y + x * x) + delta)
-        weight_to_center = torch.from_numpy(weight_to_center)
+        weight_to_center = torch.from_numpy(weight_to_center).to(torch.float32)
         return weight_to_center
 
     def _generate_dist_map(self, ft_size=48):
         y, x = np.ogrid[0:ft_size, 0:ft_size]
         y = torch.from_numpy(np.repeat(y, ft_size, axis=1)).unsqueeze(2).float()
         x = torch.from_numpy(np.repeat(x, ft_size, axis=0)).unsqueeze(2).float()
-
         return y, x
 
     def _top_with_center(self, center):
         scores = center * self.weight_to_center
-
         top_ind = torch.argmax(scores.view(1, self.ft_size * self.ft_size, 1), dim=1)
         return top_ind
 
     def _center_to_kpt(self, kpt_regress, ct_ind, ft_size=48):
         ct_y = torch.div(ct_ind, ft_size, rounding_mode="floor")
         # ct_y = (ct_ind.float() / ft_size).int().float()
+        
         ct_x = ct_ind - ct_y * ft_size
+        print_shape(ct_x, ct_y)
 
         kpt_regress = kpt_regress.view(-1, self.num_joints, 2)
         print_shape(ct_ind)
@@ -185,7 +190,7 @@ class MoveNet(nn.Module):
         # ct_ind = ct_ind.unsqueeze(2).expand(ct_ind.size(0), self.num_joints, 2)
         ct_ind = ct_ind.unsqueeze(2).repeat(ct_ind.size(0), self.num_joints, 2)
         print_shape(ct_ind)
-        
+
         kpt_coor = kpt_regress.gather(0, ct_ind).squeeze(0)
         kpt_coor = kpt_coor + torch.cat((ct_y, ct_x), dim=1)
         return kpt_coor
