@@ -7,6 +7,7 @@ import numpy as np
 from progress.bar import Bar
 import time
 import torch
+from alfred import print_shape
 
 try:
     from external.nms import soft_nms_39
@@ -43,8 +44,11 @@ class SinglePoseDetector(BaseDetector):
             return output, dets
 
     def post_process(self, dets, meta):
-        dets = dets[0, 0, :, :]
+        print_shape(dets)
+        # singlepose is just 17x3
+        # dets = dets[0, 0, :, :]
         dets = dets.cpu().numpy()
+        print_shape(dets)
         dets = single_pose_post_process(
             dets.copy(), meta["in_height"], meta["in_width"]
         )

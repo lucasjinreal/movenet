@@ -224,7 +224,10 @@ class MoveNet(nn.Module):
         kpt_coordinate = (kpt_offset_yx + kpt_coordinate) / size
         kpt_with_conf = torch.cat(
             [kpt_coordinate, kpt_conf.unsqueeze(1)], dim=1
-        ).reshape((1, 1, self.num_joints, 3))
+        )
+        # print_shape(kpt_with_conf)
+        # kpt_with_conf = kpt_with_conf.reshape((1, 1, self.num_joints, 3))
+        # print_shape(kpt_with_conf)
         return kpt_with_conf
 
 

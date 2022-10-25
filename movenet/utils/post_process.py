@@ -66,6 +66,7 @@ def single_pose_post_process(dets, h, w):
     longEdge = max(h, w)
     dets[:, 0] = dets[:, 0] * longEdge
     dets[:, 1] = dets[:, 1] * longEdge
+    print(h, w)
     if h > w:
         dets[:, 1] = dets[:, 1] - (h - w) // 2
     elif w > h:
