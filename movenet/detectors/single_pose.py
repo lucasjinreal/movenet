@@ -48,10 +48,11 @@ class SinglePoseDetector(BaseDetector):
         # singlepose is just 17x3
         # dets = dets[0, 0, :, :]
         dets = dets.cpu().numpy()
-        print_shape(dets)
+        print(dets)
         dets = single_pose_post_process(
             dets.copy(), meta["in_height"], meta["in_width"]
         )
+        print(dets)
         return dets
 
     def merge_outputs(self, detections):
