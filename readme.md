@@ -19,3 +19,7 @@ python demo.py single_pose --dataset active --arch movenet --demo data/input_ima
 
 
 ![](https://raw.githubusercontent.com/jinfagang/public_images/master/20221017164046.png)
+
+Runing on WNN:
+
+![](https://raw.githubusercontent.com/jinfagang/public_images/master/Kapture%202022-10-25%20at%2022.47.27.gif)
